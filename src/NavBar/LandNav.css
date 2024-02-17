@@ -1,0 +1,400 @@
+.landNav {
+    width: 100%;
+    height: 3.5em;
+    /* box-shadow: 0 0 1rem 0 rgb(137, 135, 135); */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0%;
+    z-index: 1;
+    background-color: #191818;
+}
+
+.landnav-l-con {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #fff;
+    /* background-color: #F4424E; */
+}
+
+.addMovieList {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    width: 5em;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5em;
+}
+
+.addMovieList:hover {
+    background-color: #504f4f;
+}
+
+.navbrandname {
+    width: 4em;
+    height: 2em;
+    border-radius: .2em;
+    color: #191818;
+
+    background-color: #F5C518;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbrandname>h1 {
+    /* font-weight: 1500em; */
+    /* font-size: 1.4em; */
+}
+
+.menubar>a {
+    text-decoration: none;
+    color: rgb(99, 100, 101);
+}
+
+.landnav-r-con {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    color: #fff;
+    /* background-color: #F4424E; */
+    border-left: #504f4f 1px solid;
+}
+
+.logoutbtn {
+    background-color: #F5C518;
+    border-radius: .5em !important;
+
+}
+
+.cartCon {
+    position: relative;
+    width: 8em;
+    height: 3em;
+    display: flex;
+    gap: .4em;
+    align-items: center;
+    /* background-color: #F4424E; */
+    cursor: pointer;
+    border-radius: .5em;
+}
+
+.cartCon:hover {
+    background: #504f4f;
+
+}
+
+.carticon {
+    font-size: 2em !important;
+    cursor: pointer;
+    color: #fff;
+}
+
+.Watchlist {
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+}
+
+.countCart {
+    position: absolute;
+    color: #ffff;
+    top: .4em;
+    background-color: rgb(41, 195, 41);
+    width: 2em;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    /* transition: .8s; */
+    font-size: .5em;
+    font-weight: 700;
+}
+
+.searchCon {
+    width: 65rem;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchBar {
+    height: 2.4em;
+    width: 25em;
+    border-radius: .5rem;
+    color: rgb(107, 96, 96) !important;
+    text-indent: 1rem;
+    outline-color: #F5C518;
+}
+
+.searchBar::placeholder {
+    color: #F5C518 !important;
+}
+
+.searchBar:focus {}
+
+.avatarProfile {
+    display: flex;
+    align-items: center;
+    gap: .4em;
+}
+
+.avatarIcon {
+    width: 1.2em !important;
+    height: 1.2em !important;
+}
+
+.navSignin {
+    width: 4em;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5em;
+}
+
+.navSignin>a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.navSignin:hover {
+
+    background-color: #504f4f;
+
+}
+
+.menubar {
+    display: flex;
+    gap: 1rem;
+}
+
+.adminLink {
+    display: none;
+}
+
+.landNavmob {
+    display: none;
+}
+
+/* .landnav-r-conMob {
+    position: relative; */
+    /* right: -100px; */
+    /* display: block; */
+/* } */
+@media(max-width:1025px){
+    .landNav{
+        width: 1060px;
+    }
+}
+@media(max-width:769px) {
+    .landNav {
+        display: none;
+    }
+
+    .landNavmob {
+        display: flex;
+        width: 790px;
+        height: 4rem;
+        position: sticky;
+        top: 0;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #191818;
+        z-index: 1;
+    }
+
+    .burgerIcon {
+        z-index: 1 !important;
+        position: relative;
+        right: 1.5rem;
+        color: #fff;
+        width: 2rem;
+        height: 3rem;
+        z-index: 1;
+    }
+
+    .landnav-r-conMob {
+        position: absolute;
+        width: 20rem;
+        height: 100vh;
+        background-color: #F5C518;
+        right: 0rem;
+         top: 4rem;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 3em;
+        /* justify-content: center; */
+        align-items: center;
+        /* transition: 2s; */
+        /* margin-top: 2em; */
+
+    }
+
+    .menuMob {
+        width: 20rem;
+        height: 10rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        background-color: #F4424E;
+    }
+.avatarProfile{
+    margin-top: 3em;
+}
+    .menuMob>a {
+        text-decoration: none;
+    }
+
+    .adminmobmenu>a {
+        text-decoration: none;
+    }
+.mobAllignuser{
+    position: relative;
+    left: .5em;
+    width: 90%;
+    /* background-color: green; */
+}
+    .mobAllign{
+        width: 10em;
+        /* background-color: #F4424E; */
+        display: flex;
+        justify-content:flex-start;
+    }
+}
+
+@media(max-width:426px) {
+    .landNav {
+        display: none;
+    }
+
+    .landNavmob {
+        display: flex;
+        width: 790px;
+        height: 4rem;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #191818;
+
+    }
+
+    .burgerIcon {
+        z-index: 1 !important;
+        position: relative;
+        right: 1.5rem;
+        color: #fff;
+        width: 2rem;
+        height: 3rem;
+        z-index: 1;
+    }
+
+    .landnav-r-conMob {
+        position: absolute;
+        width: 20rem;
+        height: 100vh;
+        background-color: #F5C518;
+        right: 0rem;
+        top: 4rem;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        /* gap: 1em; */
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .menuMob {
+        width: 20rem;
+        height: 10rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        /* background-color: #F4424E; */
+    }
+
+    .menuMob>a {
+        text-decoration: none;
+    }
+
+    .adminmobmenu>a {
+        text-decoration: none;
+    }
+}
+
+
+
+@media(max-width:321px) {
+    .landNav {
+        display: none;
+    }
+
+    .landNavmob {
+        display: flex;
+        width: 700px;
+        height: 4rem;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #191818;
+
+    }
+
+    .searchCon {
+        width: 30%;
+    }
+
+    .burgerIcon {
+        z-index: 1 !important;
+        position: relative;
+        right: 1.5rem;
+        color: #fff;
+        width: 2rem;
+        height: 3rem;
+        z-index: 1;
+    }
+
+    .landnav-r-conMob {
+        position: absolute;
+        width: 20rem;
+        height: 100vh;
+        background-color: #F5C518;
+        right: 0rem;
+        top: 4rem;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        /* gap: 1em; */
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .menuMob {
+        width: 20rem;
+        height: 10rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        /* background-color: #F4424E; */
+    }
+
+    .menuMob>a {
+        text-decoration: none;
+    }
+
+    .adminmobmenu>a {
+        text-decoration: none;
+    }
+}

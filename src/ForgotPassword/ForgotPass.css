@@ -1,0 +1,96 @@
+.forgetPass{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    /* background-color: red; */
+}
+.forgetPass-l{
+    display: none;
+    width: 40%;
+    height: 100dvh;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.forgetPass-r{
+    width: 100%;
+    /* background-color: aqua; */
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .3rem;
+}
+.forgetPass-r>a{
+    display: flex;
+    width: 15rem;
+    text-decoration: none;
+    color: rgb(18, 125, 219);
+}
+@media(max-width:769px){
+    .forgetPass-l{
+        width: 769px;
+        height: 70vh;
+        /* background-color: aqua; */
+    }
+    .forgetPass-r{
+        width: 769px;
+        height: 30vh;
+        position: relative;
+        top: -3rem;
+    }
+    .forPassImg{
+        width: 500px;
+    }
+}
+@media(max-width:426px){
+    .forgetPass-l{
+        width: 426px;
+        height: 60vh;
+        /* background-color: aqua; */
+    }
+    .forgetPass-r{
+        width: 426px;
+        height: 20vh;
+        position: relative;
+        top: -1.5rem;
+    }
+    .forPassImg{
+        width: 350px;
+    }
+}
+@media(max-width:376px){
+    .forgetPass-l{
+        width: 376px;
+        height: 60vh;
+        /* background-color: aqua; */
+    }
+    .forgetPass-r{
+        width: 376px;
+        height: 20vh;
+        position: relative;
+        top: -2rem;
+    }
+    .forPassImg{
+        width: 320px;
+    }
+}
+@media(max-width:321px){
+    .forgetPass-l{
+        width: 321px;
+        height: 60vh;
+        /* background-color: aqua; */
+    }
+    .forgetPass-r{
+        width: 321px;
+        height: 30vh;
+        position: relative;
+        top: -2rem;
+    }
+    .forPassImg{
+        width: 300px;
+    }
+}

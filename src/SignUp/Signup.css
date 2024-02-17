@@ -1,0 +1,116 @@
+/* *,*::after,*::before{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+ */
+
+.signupPage{
+    width: 100%;
+    height: 100vh;
+    /* height: 50em; */
+    display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    /* flex-wrap: wrap; */
+    background-color: #fff;
+    /* border-radius: 8px; */
+    gap: 1rem;
+    /* position: relative; */
+    /* box-shadow: 0 1rem 2rem rgb(0, 0, 0,.8); */
+}
+/* .designSignupPart{
+    width: 40%;
+    height: 100vh;
+    background:linear-gradient(-40deg,#4481eb,#04befe);
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+} */
+.signupForm{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    transition: 1s;
+}
+.form-input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+.LogMSign{
+    width: 19rem;
+    display: flex;
+    justify-content: flex-start;
+}
+.pencilImg{
+    width: 25rem;
+}
+
+.cancelIcon{
+    z-index: 1;
+}
+.signupBtn {
+    background-color: #F5C518 !important;
+    color: #191818 !important;
+    width: 23em !important
+}
+.signinbtn{
+    /* background-color: #191818; */
+    color: rgb(75, 75, 215);
+}
+@media(max-width:769px){
+    .signupPage{
+        width: 25rem;
+    }
+    .designSignupPart{
+        width: 350px;
+        /* display: none; */
+        /* width: 600px;
+        height: 14rem;
+        position: relative;
+        top: 0%; */
+    }
+    .signupForm{
+        width: 450px;
+        position: relative;
+        bottom: 0rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .pencilImg{
+        width: 18rem;
+    }
+}
+@media(max-width:426px){
+    .signupPage{
+        width: 25em;
+        height: 30em;        
+    }
+    /* .designSignupPart{
+        display: none;
+         width: 600px;
+        height: 14rem;
+        position: relative;
+        top: 0%; 
+    }     */
+    .signupForm{
+        width: 426px;
+        position: relative;
+        bottom: 0rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
