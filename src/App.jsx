@@ -10,9 +10,8 @@ import Home from './Home/Home'
 import AddMovie from './AddMovie/AddMovie'
 import EditMovie from './EditMovie/EditMovie'
 import WatchList from './watchList/WatchList'
+import ForgotPass from './ForgotPassword/ForgotPass'
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <BrowserRouter>
@@ -25,6 +24,7 @@ function App() {
           <Route path='/addmovie' element={<><LandNavBar /><AddMovie /></>} />
           <Route path='/watchlist' element={<><LandNavBar/><WatchList/></>}/>
           <Route path='/editmovie/:id' element={<><LandNavBar /><EditMovie /></>} />
+          <Route path='/forgotPass' element={<><ForgotPass/></>}/>
         </Routes>
       </BrowserRouter>
     </>

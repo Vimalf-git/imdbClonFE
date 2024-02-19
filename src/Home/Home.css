@@ -1,4 +1,4 @@
-.homeCon{
+.homeCon {
     width: 100%;
     height: auto;
     min-height: 90vh;
@@ -7,7 +7,8 @@
     display: flex;
 
 }
-.cardcon{
+
+.cardcon {
     width: 100%;
     height: auto;
     display: flex;
@@ -18,7 +19,8 @@
     margin-top: 2em;
     margin-bottom: 1em;
 }
-.card{
+
+.card {
     width: 20em;
     height: 26em;
     background-color: #191818;
@@ -29,34 +31,40 @@
     position: relative;
     border-radius: 4px;
 }
-.cardheader{
+
+.cardheader {
     width: 20em;
     height: 3em;
     display: flex;
     justify-content: space-around;
     /* background-color: red; */
 }
-.cardimg{
+
+.cardimg {
     width: 100%;
     height: 12em;
     aspect-ratio: 1/1;
     display: flex;
     justify-content: center;
 }
-.moviImg{
+
+.moviImg {
     width: 100%;
-    height:12em;
+    height: 12em;
     aspect-ratio: 1/1;
 }
-.movieName{
+
+.movieName {
     width: 100%;
     height: 3em;
     display: flex;
+    text-indent: 1em;
     align-items: center;
     /* justify-content: center; */
     /* background-color: #191818; */
 }
-.movieName>p{
+
+.movieName>p {
     position: relative;
     left: 1em;
     /* top: .5em; */
@@ -64,20 +72,23 @@
     font-size: 1em;
     font-weight: 600;
 }
-.cardDesc{
+
+.cardDesc {
     width: 100%;
     height: 5em;
     background-color: #191818;
     color: #fff;
     /* background-color: red; */
-    
+
 }
-.cardDesc>p{
+
+.cardDesc>p {
     position: relative;
     left: 1em;
     top: .5em;
 }
-.cardFooter{
+
+.cardFooter {
     width: 100%;
     height: 5.5rem;
     background-color: #191818;
@@ -87,14 +98,16 @@
     color: #fff;
     border-radius: 4px;
 }
-.releaseyr{
+
+.releaseyr {
     display: flex;
     flex-direction: column;
     gap: .5em;
     position: relative;
     right: .5em;
 }
-.footerName{
+
+.footerName {
     width: 12em;
     display: flex;
     flex-direction: column;
@@ -103,7 +116,8 @@
     /* background-color: aqua; */
 
 }
-.footerName>p{
+
+.footerName>p {
     width: 11em;
     /* height: 2rem; */
     display: flex;
@@ -112,20 +126,23 @@
     left: 1em;
     /* background-color: red; */
 }
-.addplayList{
+
+.addplayList {
     cursor: pointer;
     display: flex;
     align-items: center;
 }
-.editDelBtn{
-    /* background-color: aqua; */
+
+.editDelBtn {
     display: flex;
     gap: .5em;
     align-items: center;
     cursor: pointer;
+    justify-content: center;
 
 }
-.loadingCom{
+
+.loadingCom {
     color: #fff;
     width: 100%;
     height: 100vh;
@@ -134,19 +151,90 @@
     align-items: center;
 }
 
-@media(max-width:1025px){
-    .homeCon{
+@media(max-width:1025px) {
+    .homeCon {
         width: 1060px;
     }
 }
-@media(max-width:769px){
-    .homeCon{
+
+@media(max-width:769px) {
+    .homeCon {
         width: 790px;
     }
 }
 
-@media(max-width:321px){
-    .homeCon{
-        width: 700px;
+@media(max-width:321px) {
+    .homeCon {
+        width: 720px;
+    }
+}
+
+@media(min-width:2400px) {
+    .card {
+        width: 40em;
+        height: 40em;
+    }
+
+    .cardheader {
+        width: 40em;
+        height: 4em;
+    }
+
+    .cardimg {
+        width: 100%;
+        height: 20em;
+    }
+
+    .moviImg {
+        width: 100%;
+        height: 20em;
+    }
+
+    .movieName {
+        font-size: 1.5em;
+    }
+
+    .cardDesc {
+        font-size: 1.2em;
+    }
+
+    .cardFooter {
+        width: 100%;
+        height: 5.5rem;
+    }
+
+    .releaseyr {
+        width: 15em;
+        height: 4.5em;
+        justify-content: space-around;
+    }
+
+    .footerName {
+        width: 21em;
+    }
+
+    .footerName>p {
+        width: 18em;
+        font-size: 1.5em;
+    }
+
+    .playlistBtn {
+        width: 1.5em !important;
+        height: 1.5em !important;
+    }
+
+    .editDelBtn {
+        width: 10em;
+        justify-content: space-around;
+    }
+
+    .deleteBtn {
+        width: 1.5em !important;
+        height: 1.5em !important;
+    }
+
+    .editBtn {
+        width: 1.5em !important;
+        height: 1.5em !important;
     }
 }

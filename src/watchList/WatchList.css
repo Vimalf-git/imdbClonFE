@@ -1,11 +1,13 @@
-.watchListCon{
+.watchListCon {
     width: 100%;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     background-color: black;
     display: flex;
     justify-content: center;
 }
-.WatchcardCon{
+
+.WatchcardCon {
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -14,13 +16,15 @@
     margin-top: 1em;
     margin-bottom: 1em;
 }
-.watchlistCard{
+
+.watchlistCard {
     width: 40em;
     height: 8em;
     background-color: #191818;
     display: flex;
 }
-.imgCon{
+
+.imgCon {
     width: 10em;
     height: 8em;
     aspect-ratio: 1/1;
@@ -30,16 +34,19 @@
     border-right: #666565 1px solid;
     /* background-color: aqua; */
 }
-.watchImg{
+
+.watchImg {
     width: 7em;
     aspect-ratio: 1/1;
     border-radius: 50%;
 }
-.WatchrightCon{
+
+.WatchrightCon {
     display: flex;
     gap: 2em;
 }
-.watchListName{
+
+.watchListName {
     width: 10em;
     display: flex;
     flex-direction: column;
@@ -47,10 +54,12 @@
     position: relative;
     left: 1em;
 }
-.watchListName>p{
+
+.watchListName>p {
     color: #ffff;
 }
-.ratingsWatchList{
+
+.ratingsWatchList {
     width: 10em;
     display: flex;
     flex-direction: column;
@@ -59,20 +68,90 @@
 
 }
 
-.ratingsWatchList>p{
+.ratingsWatchList>p {
     color: #fff;
 }
 
-.watchdelIcon{
+.watchdelIcon {
     position: relative;
     top: 1em;
     color: rgb(206, 84, 84);
     cursor: pointer;
 }
 
-@media(max-width:769px){
-.watchListCon{
-    width: 700px;
-    height: 100vh;
+@media(max-width:1025px){
+    .watchListCon{
+        width: 1060px;
+        height: 100vh;
+    }
+    }
+
+@media(max-width:769px) {
+    .watchListCon {
+        width: 790px;
+        height: 100vh;
+    }
 }
+
+@media(max-width:426px) {
+    .watchListCon {
+        width: 790px;
+        height: 100vh;
+    }
+}
+
+@media(max-width:321px) {
+    .watchListCon {
+        width: 720px;
+        height: 100vh;
+    }
+}
+@media(min-width:2400px){
+    
+    
+    .WatchcardCon {
+        gap: 2em;
+       }
+    
+    .watchlistCard {
+        width: 70em;
+        height: 15em;
+        }
+    
+    .imgCon {
+        width: 20em;
+        height: 15em;
+        }
+    
+    .watchImg {
+        width: 12em;
+        }
+    
+    .WatchrightCon {
+        justify-content: space-around;
+        width: 50em;
+    }
+    
+
+    .watchListName {
+        width: 20em;
+        }
+    
+    .watchListName>p {
+        font-size: 2em;
+    }
+    
+    .ratingsWatchList {
+        width: 17em;
+       }
+    
+    .ratingsWatchList>p {
+        color: #fff;
+        font-size: 2em;
+    }
+    
+    .watchdelIcon {
+        width: 2.5em !important;
+        height: 2.5em !important;
+       }
 }

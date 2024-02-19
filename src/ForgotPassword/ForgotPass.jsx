@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
-// import ApiService from '../../common/ApiService';
-// import { UserDetailContext } from './UserDetailContext';
 import { Button, TextField } from '@mui/material';
-// import SendIcon from '@mui/icons-material/Send';
-// import ForgetPassImg from '../../assets/9712739_4140043.svg'
 import { ForwardToInbox } from '@mui/icons-material';
 import './ForgotPass.css'
 import ApiService from '../Common/ApiService';
@@ -12,7 +8,6 @@ import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 function ForgotPass() {
 
-    // const { mail, setMail } = useContext(UserDetailContext)
     const [mail, setMail] = useState("");
     const mailSend = async () => {
         try {
@@ -35,21 +30,16 @@ function ForgotPass() {
     return (
         <>
             <div className='forgetPass'>
-                {/* <div className='forgetPass-l'>  */}
-                {/* <img className='forPassImg' src={ForgetPassImg}/> */}
-                {/* </div> */}
                 <div className='forgetPass-r'>
                     <h1>
                         Forget Password
                     </h1>
 
-                    <TextField sx={{ m: 1, width: '15rem' }}
-                        required id="outlined-basic" label="Mail" variant="outlined"
-                        value={mail} name='Mail' onChange={(e) => setMail(e.target.value)}
+                    <input value={mail} placeholder='Email' name='Mail' onChange={(e) => setMail(e.target.value)}
                     />
-                    <Link to={'/loginlanding'}><ArrowBackIcon/>LoginPage</Link>
-                    <Button onClick={() => { mailSend() }}
-                        variant='contained'
+                    <Link to={'/login'}><ArrowBackIcon/>LoginPage</Link>
+                    <Button onClick={() => { mailSend() }} 
+                        variant='contained' className='forgetBtn'
                     >
                         send &nbsp;<ForwardToInbox />
                     </Button>

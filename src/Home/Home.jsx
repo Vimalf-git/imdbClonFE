@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import './Home.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { addWatchList, createWatchList, delteMoviList, getMoviList, remove } from '../Container/movieSlice';
+import { addWatchList, createWatchList, delteMoviList, getMoviList, getWatchEditList, getWatchList, remove } from '../Container/movieSlice';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
@@ -12,7 +12,8 @@ const Home = () => {
     const { movieData, watchListdata } = useSelector((state) => state.userSlice);
     useEffect(() => {
         dispatch(getMoviList())
-    }, [dispatch])
+        dispatch(getWatchList())
+    }, [])
     const deleteData = (index, id) => {
         dispatch(remove(index));
         dispatch(delteMoviList(id))
@@ -22,6 +23,11 @@ const Home = () => {
         dispatch(addWatchList(data))
         dispatch(createWatchList(data))
     }
+    const editData=(id)=>{
+        console.log(id);
+        dispatch(getWatchEditList(id));
+        navigate(`/editmovie/${id}`)
+    }
     return (
         <div className='homeCon'>
             <div className='cardcon'>
@@ -29,11 +35,11 @@ const Home = () => {
                     return <div className='card' key={i}>
                         <div className='cardheader'>
                             <div className='addplayList'>
-                                <PlaylistAddIcon onClick={() => { addWatchListData(e) }} />
+                                <PlaylistAddIcon className='playlistBtn' onClick={() => { addWatchListData(e) }} />
                             </div>
                             <div className='editDelBtn'>
-                                <DeleteIcon onClick={() => { deleteData(i, e._id) }} />
-                                <ModeEditIcon onClick={() => { navigate(`/editmovie/${e._id}`) }} />
+                                <DeleteIcon className='deleteBtn' onClick={() => { deleteData(i, e._id) }} />
+                                <ModeEditIcon className='editBtn' onClick={() => { editData(e._id) }} />
                             </div>
                         </div>
                         <div className='cardimg'>

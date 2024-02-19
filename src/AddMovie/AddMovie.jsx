@@ -1,9 +1,9 @@
 import { Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { IoMdImages } from 'react-icons/io'
+import { IoMdCloseCircle, IoMdImages } from 'react-icons/io'
 import './AddMovie.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getMoviList, postMoviList } from '../Container/movieSlice'
+import { addActorData, addProducerData, getMoviList, postMoviList } from '../Container/movieSlice'
 import { useNavigate } from 'react-router-dom'
 const AddMovie = () => {
   const [postimageUpload, setPostImageUpload] = useState(null);
@@ -14,14 +14,17 @@ const AddMovie = () => {
   const [desc, setDesc] = useState("")
   const [rating, setRating] = useState('')
   const [customToggler, setCustomToggler] = useState(false);
+  const [producercustomToggler, setproducercustomToggler] = useState(false);
+
   const dispatch = useDispatch();
-  const { producerList, actorList } = useSelector((state) => state.userSlice);
-  const navigate = useNavigate()
-  const handleSubmit = async () => {
-    console.log('submit');
-    if (postimageUpload == null) {
-      alert('empty')
-    } else {
+  const { producerList, actorList, isLoading } = useSelector((state) => state.userSlice);
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    // if (postimageUpload == '' || producerName == '' || actorname == '' || moviename == '' || releaseYear == '' || desc == '' || rating == '') {
+    //   alert('fill all feild');
+
+    // } else {
       const payload = new FormData();
       payload.append('moviename', moviename);
       payload.append('actorname', actorname);
@@ -30,44 +33,68 @@ const AddMovie = () => {
       payload.append('releaseYear', releaseYear);
       payload.append('rating', rating)
       payload.append('file', postimageUpload);
-
       try {
         dispatch(postMoviList(payload))
         // navigate('/home')
       } catch (error) {
 
-      }
+      // }
     }
   }
-
+const setActorData=()=>{
+  console.log(actorname);
+  dispatch(addActorData(actorname))
+  setCustomToggler(false);
+}
+const setProducerData=()=>{
+  // console.log(actorname);
+  dispatch(addProducerData(producerName))
+  setproducercustomToggler(false);
+}
   useEffect(() => {
     dispatch(getMoviList())
   }, [])
-  // console.log(producerlist);
+  // console.log(actorList);
   return (
     <div className='addmovieCon'>
-      <form className='postform'>
+      <form className='postform' >
         <div >
-          <input className='textFeild' name='tittle' onChange={(e) => setMovieName(e.target.value)} type='text' placeholder='movie name' />
+          <input className='textFeild' name='tittle' onChange={(e) => setMovieName(e.target.value)}
+            type='text' placeholder='movie name' />
+        </div>
 
-          {/* <input className='textFeild'  name='tittle' onChange={(e)=>setMovieList(e.target.value)} type='text' placeholder='Tittle' /> */}
-        </div>
-        <div>
-          <select className='ProducerFeild' name='producername' onChange={(e) => setproducerName(e.target.value)}>
+
+        <div className='actorCon'>
+          <select className='ProducerFeild' name='producername' value={producerName} onChange={(e) => setproducerName(e.target.value)}>
             <option value="">Producer</option>
-            {producerList.map((e) => <option>{e}</option>)}
+            {producerList.map((e,i) => <option key={i}>{e}</option>)}
           </select>
-        </div>
-        <div>
-          <select className='DirectorFeild' name='actorname' onChange={(e) => setactorname(e.target.value)}>
-            <option value="">Actor</option>
-            {actorList.map((e) => <option>{e}</option>)}
-            <option onClick={() => { setCustomToggler(true) }}>Other</option>
-          </select>
-          {customToggler ? <div className='cusTogglerCon'>
-            <input type='text' onChange={(e) => setactorname(e.target.value)} />
-            <button onClick={setCustomToggler(pre => !pre)}>Save</button>
+          <Button className='addBtn' variant='contained' onClick={()=>setproducercustomToggler(true)}>Add</Button>
+         
+          {producercustomToggler ? <div className='cusTogglerCon'>
+          <IoMdCloseCircle className='crossIcon' onClick={() =>   setproducercustomToggler(pre=>!pre)} /> 
+            <input className='addInput' type='text' onChange={(e) => setproducerName(e.target.value)} />
+            <Button className='addBtn' variant='contained' onClick={()=>{setProducerData()}}>Save</Button>
           </div> : <></>}
+
+        </div>
+
+
+        <div className='actorCon'>
+          <select className='actorFeild' value={actorname} name='actorname' onChange={(e) => setactorname(e.target.value)}>
+            <option value="">Actor</option>
+            {actorList.map((e,i) => <option key={i}>{e}</option>)}
+            {/* <option onClick={() => { setCustomToggler(true) }}>Other</option> */}
+          </select>
+          <Button className='addBtn' variant='contained' onClick={()=>setCustomToggler(true)}>Add</Button>
+
+          {customToggler ? <div className='cusTogglerCon'>
+          <IoMdCloseCircle className='crossIcon' onClick={() =>   setCustomToggler(pre=>!pre)} /> 
+            <input className='addInput' type='text' onChange={(e) => setactorname(e.target.value)} />
+            <Button className='addBtn' variant='contained' onClick={()=>{setActorData()}}>Save</Button>
+          </div> : <></>}
+
+
         </div>
         <input className='dateFeild' type='date' onChange={(e) => setReleaseYear(e.target.value)} />
         <div>
@@ -80,7 +107,7 @@ const AddMovie = () => {
           <IoMdImages className='faImg' /><span style={{ color: 'blue', cursor: 'pointer' }}>select your movie img</span>
         </div>
         <div>
-          <select className='DirectorFeild' name='rating' onChange={(e) => setRating(e.target.value)}>
+          <select className='rating' name='rating' onChange={(e) => setRating(e.target.value)}>
             <option value="">Rating</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -90,7 +117,7 @@ const AddMovie = () => {
           </select>
         </div>
         <div >
-          <Button className='postBtn' variant='contained' onClick={() => { handleSubmit() }}>Post</Button>
+          <Button className='postBtn' onClick={()=>{handleSubmit()}} variant='contained' >Post</Button>
         </div>
       </form>
     </div>

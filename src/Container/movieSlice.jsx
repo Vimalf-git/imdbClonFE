@@ -5,7 +5,6 @@ export const getMoviList =
     createAsyncThunk("getMovieList", async (_, { rejectWithValue }) => {
         try {
             const res = await ApiService.get('/getmovielist');
-            console.log(res.data);
             if (res.status == 200)
                 return res.data.data;
         } catch (error) {
@@ -30,22 +29,11 @@ export const postMoviList =
         }
     })
 
-export const delteMoviList =
-    createAsyncThunk("delteMovieList", async (value, { rejectWithValue }) => {
-        try {
-            let res = await ApiService.delete(`/deletemovie/${value}`)
-            if (res.status == 200) {
-                getMoviList()
-            }
-        } catch (error) {
-            return rejectWithValue({ error: error.message })
-        }
-    })
+
 
 export const updateMovieList =
     createAsyncThunk("postMovieList", async (value, { rejectWithValue }) => {
         try {
-            console.log(value);
             let res = await ApiService.put('/updatemovie', value, {
                 headers: { "Content-Type": 'multipart/form-data' },
             })
@@ -60,7 +48,6 @@ export const updateMovieList =
 export const createWatchList =
     createAsyncThunk("createWatchList", async (value, { rejectWithValue }) => {
         try {
-            console.log(value);
             let res = await ApiService.post('/createwatchlist', value)
             if (res.status == 200) {
                 // getMoviList()
@@ -74,7 +61,6 @@ export const createWatchList =
 export const getWatchList =
     createAsyncThunk("getWatchList", async (_, { rejectWithValue }) => {
         try {
-            // console.log(value);
             let res = await ApiService.get('/getwatchlist')
             if (res.status == 200) {
                 return res.data.data
@@ -95,6 +81,30 @@ export const removewatch =
             return rejectWithValue({ error: error.message })
         }
     })
+export const delteMoviList =
+    createAsyncThunk("delteMovieList", async (value, { rejectWithValue }) => {
+        try {
+            let res = await ApiService.delete(`/deletemovie/${value}`)
+            if (res.status == 200) {
+                getMoviList()
+                getWatchList()
+            }
+        } catch (error) {
+            return rejectWithValue({ error: error.message })
+        }
+    })
+
+export const getWatchEditList =
+    createAsyncThunk("getWatchEditList", async (value, { rejectWithValue }) => {
+        try {
+            let res = await ApiService.get(`/getwatchupdatelist/${value}`);
+            if (res.status == 200) {
+                return res.data.UpdateListRes;
+            }
+        } catch (error) {
+            return rejectWithValue({ error: error.message });
+        }
+    })
 
 // removewatchlist
 const movieData = createSlice({
@@ -104,8 +114,9 @@ const movieData = createSlice({
         movieDataSam: [],
         isLoading: false,
         watchListdata: [],
-        producerList:[],
-        actorList:[]
+        producerList: [],
+        actorList: [],
+        updateEditData: {}
     },
     reducers: {
         filter: (state, action) => {
@@ -116,9 +127,17 @@ const movieData = createSlice({
                 state.movieData = state.movieDataSam
             }
         },
+        addActorData:(state,action)=>{
+            // console.log(action.payload);
+           state.actorList.push(action.payload)
+        },
+        addProducerData:(state,action)=>{
+            state.producerList.push(action.payload)
+        },
         remove: (state, action) => {
             state.movieData.splice(action.payload, 1);
             state.movieDataSam.splice(action.payload, 1);
+            state.watchListdata.splice(action.payload, 1);
         },
         addWatchList: (state, action) => {
             state.watchListdata.push(action.payload)
@@ -136,15 +155,11 @@ const movieData = createSlice({
                 state.movieData = action.payload;
                 state.isLoading = false
                 state.movieDataSam = action.payload
-                // const [producerlist,setProducerList]=useState([]);
-                // const setproducer=()=>{
-                 let data=action.payload.map((e,i)=>e.producerName)
-                 console.log(data);
-                 state.producerList=data.filter((e,i)=>data.indexOf(e)==i)
-                 let actorData=action.payload.map((e,i)=>e.actorName)
-                 state.actorList=actorData.filter((e,i)=>actorData.indexOf(e)==i)
-                  // console.log(data);
-                // }
+                let data = action.payload.map((e, i) => e.producerName)
+                state.producerList = data.filter((e, i) => data.indexOf(e) == i)
+                let actorData = action.payload.map((e, i) => e.actorName)
+                state.actorList = actorData.filter((e, i) => actorData.indexOf(e) == i)
+
             })
             .addCase(getMoviList.rejected, (state, action) => {
                 state.isLoading = false;
@@ -160,8 +175,6 @@ const movieData = createSlice({
                 state.isLoading = false
                 state.movieDataSam = []
                 state.movieData = []
-                // const navigate=useNavigate();
-                // navigate('/home')
             })
             .addCase(postMoviList.rejected, (state, action) => {
                 state.isLoading = false;
@@ -181,8 +194,24 @@ const movieData = createSlice({
                 state.watchListdata = [];
 
             })
+
+            // editUpdatedata
+
+            .addCase(getWatchEditList.pending, (state, action) => {
+                state.isLoading = true;
+                // state.updateEditData = '';
+            })
+            .addCase(getWatchEditList.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.updateEditData = action.payload
+            })
+            .addCase(getWatchEditList.rejected, (state, action) => {
+                state.isLoading = false;
+                state.updateEditData = [];
+
+            })
     }
 })
 
-export const { filter, remove, addWatchList, removeWatchList} = movieData.actions;
+export const { filter, remove, addWatchList, removeWatchList,addActorData,addProducerData } = movieData.actions;
 export default movieData.reducer
