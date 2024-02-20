@@ -6,8 +6,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getMoviList, getWatchEditList, updateMovieList } from '../Container/movieSlice'
 const EditMovie = () => {
     const param = useParams()
-    // const {  } = useSelector((state) => state.userSlice);
-
     let { producerList, actorList, updateEditData } = useSelector(state => state.userSlice);
     const [postimageUpload, setPostImageUpload] = useState(null);
     const [producerName, setproducerName] = useState("");
@@ -17,32 +15,34 @@ const EditMovie = () => {
     const [desc, setDesc] = useState("")
     const [rating, setRating] = useState('')
     const dispatch = useDispatch();
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     const handleSubmit = () => {
         if (postimageUpload == '' || producerName == '' || actorname == '' || moviename == '' || releaseYear == '' || desc == '' || rating == '') {
             alert('fill all feild');
-          } else {
-        const payload = new FormData();
-        payload.append('id', param.id);
-        payload.append('moviename', moviename);
-        payload.append('actorname', actorname);
-        payload.append('producerName', producerName);
-        payload.append('desc', desc);
-        payload.append('rating', rating)
-        payload.append('releaseYear', releaseYear);
-        payload.append('file', postimageUpload);
-        try {
-            dispatch(updateMovieList(payload))
-            // navigate('/home')
+        } else {
+            const payload = new FormData();
+            payload.append('id', param.id);
+            payload.append('moviename', moviename);
+            payload.append('actorname', actorname);
+            payload.append('producerName', producerName);
+            payload.append('desc', desc);
+            payload.append('rating', rating)
+            payload.append('releaseYear', releaseYear);
+            payload.append('file', postimageUpload);
+            try {
+                dispatch(updateMovieList(payload))
+                setTimeout(() => {
+                    navigate('/home')
+                }, 1000)
 
-        } catch (error) {
+            } catch (error) {
 
+            }
         }
     }
-    }
     const getUpdateData = () => {
-console.log(updateEditData);
+        console.log(updateEditData);
         setMovieName(updateEditData.movieName);
         setReleaseYear(updateEditData.releaseYear);
         setproducerName(updateEditData.producerName);
@@ -53,15 +53,15 @@ console.log(updateEditData);
     useEffect(() => {
         getUpdateData();
     }, [updateEditData])
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getMoviList());
         dispatch(getWatchEditList(param.id));
-    },[])
+    }, [])
     return (
         <div className='addmovieCon'>
             <form className='postform'>
                 <div >
-                    <input className='textFeild' value={moviename??'d'} name='tittle' onChange={(e) => setMovieName(e.target.value)} type='text' placeholder='movie name' />
+                    <input className='textFeild' value={moviename ?? 'd'} name='tittle' onChange={(e) => setMovieName(e.target.value)} type='text' placeholder='movie name' />
                 </div>
                 <div>
                     <select className='ProducerEditFeild' value={producerName ?? ''} name='producername' onChange={(e) => setproducerName(e.target.value)}>

@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import ApiService from "../Common/ApiService";
-import { useNavigate } from "react-router-dom";
 export const getMoviList =
     createAsyncThunk("getMovieList", async (_, { rejectWithValue }) => {
         try {
@@ -14,16 +13,14 @@ export const getMoviList =
 
 export const postMoviList =
     createAsyncThunk("postMovieList", async (value, { rejectWithValue }) => {
+        console.log('enter into post movie');
         try {
             let res = await ApiService.post('/createmovie', value, {
                 headers: { "Content-Type": 'multipart/form-data' },
             })
             if (res.status == 200) {
-                //   navigate('/home')
                 getMoviList()
             }
-            //   if(res.status==200)
-            // return res.data.data;
         } catch (error) {
             return rejectWithValue({ error: error.message })
         }
@@ -32,14 +29,12 @@ export const postMoviList =
 
 
 export const updateMovieList =
-    createAsyncThunk("postMovieList", async (value, { rejectWithValue }) => {
+    createAsyncThunk("updateMovieList", async (value, { rejectWithValue }) => {
         try {
             let res = await ApiService.put('/updatemovie', value, {
                 headers: { "Content-Type": 'multipart/form-data' },
             })
-            if (res.status == 200) {
-                getMoviList()
-            }
+            // getMoviList()
         } catch (error) {
             return rejectWithValue({ error: error.message })
         }
@@ -127,11 +122,16 @@ const movieData = createSlice({
                 state.movieData = state.movieDataSam
             }
         },
-        addActorData:(state,action)=>{
-            // console.log(action.payload);
-           state.actorList.push(action.payload)
+        updateMovieLocalList: (state, action) => {
+            state.movieData.splice(action.payload.id, 1, action.payload.data)
+            state.movieDataSam.splice(action.payload.id, 1, action.payload.data)
+
         },
-        addProducerData:(state,action)=>{
+        addActorData: (state, action) => {
+            // console.log(action.payload);
+            state.actorList.push(action.payload)
+        },
+        addProducerData: (state, action) => {
             state.producerList.push(action.payload)
         },
         remove: (state, action) => {
@@ -150,11 +150,14 @@ const movieData = createSlice({
     extraReducers(builder) {
         builder.addCase(getMoviList.pending, (state, action) => {
             state.isLoading = true;
+            // state.movieData = [];
+
         })
             .addCase(getMoviList.fulfilled, (state, action) => {
                 state.movieData = action.payload;
                 state.isLoading = false
                 state.movieDataSam = action.payload
+
                 let data = action.payload.map((e, i) => e.producerName)
                 state.producerList = data.filter((e, i) => data.indexOf(e) == i)
                 let actorData = action.payload.map((e, i) => e.actorName)
@@ -173,24 +176,38 @@ const movieData = createSlice({
             })
             .addCase(postMoviList.fulfilled, (state, action) => {
                 state.isLoading = false
-                state.movieDataSam = []
-                state.movieData = []
+                // state.movieDataSam = []
+                // state.movieData = []
             })
             .addCase(postMoviList.rejected, (state, action) => {
                 state.isLoading = false;
             })
+
+            // updateMovieList
+            // .addCase(updateMovieList.pending, (state, action) => {
+            //     state.isLoading = true;
+            // })
+            // .addCase(updateMovieList.fulfilled, (state, action) => {
+            // state.isLoading = false
+            // state.movieDataSam = []
+            // state.movieData = []
+            // })
+            // .addCase(updateMovieList.rejected, (state, action) => {
+            //     state.isLoading = false;
+            // })
+
             // getwatchlist
 
             .addCase(getWatchList.pending, (state, action) => {
-                state.isLoading = true;
+                // state.isLoading = true;
             })
             .addCase(getWatchList.fulfilled, (state, action) => {
-                state.isLoading = false
+                // state.isLoading = false
                 state.watchListdata = action.payload
                 // state.movieData = []
             })
             .addCase(getWatchList.rejected, (state, action) => {
-                state.isLoading = false;
+                // state.isLoading = false;
                 state.watchListdata = [];
 
             })
@@ -198,20 +215,21 @@ const movieData = createSlice({
             // editUpdatedata
 
             .addCase(getWatchEditList.pending, (state, action) => {
-                state.isLoading = true;
+                // state.isLoading = true;
                 // state.updateEditData = '';
             })
             .addCase(getWatchEditList.fulfilled, (state, action) => {
-                state.isLoading = false
+                // state.isLoading = false
                 state.updateEditData = action.payload
             })
             .addCase(getWatchEditList.rejected, (state, action) => {
-                state.isLoading = false;
+                // state.isLoading = false;
                 state.updateEditData = [];
 
             })
     }
 })
 
-export const { filter, remove, addWatchList, removeWatchList,addActorData,addProducerData } = movieData.actions;
+export const { filter, remove, addWatchList, removeWatchList,
+    updateMovieLocalList, addActorData, addProducerData } = movieData.actions;
 export default movieData.reducer

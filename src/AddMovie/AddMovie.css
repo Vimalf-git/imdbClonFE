@@ -93,7 +93,7 @@
 
 .cusTogglerCon {
     width: 16em;
-    height: 10em;
+    height: 18em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -107,7 +107,11 @@
     box-shadow: 0, 0.1em, 1em black;
     z-index: 1;
 }
-
+.cusTogglerCon>select{
+    width: 12em;
+    height: 2em;
+    text-indent: .5em;
+}
 .crossIcon {
     position: relative;
     right: -6.5em;
@@ -116,6 +120,7 @@
 
 .addInput {
     height: 2em;
+    text-indent: 1em;
 }
 
 @media(max-width:1025px) {

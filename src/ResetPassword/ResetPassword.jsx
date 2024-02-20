@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify';
-// import resetPassImg from '../../assets/resetImg.svg'
 import { Button, TextField } from '@mui/material';
-import {PublishedWithChanges } from '@mui/icons-material';
+import { PublishedWithChanges } from '@mui/icons-material';
 import './ResetPassword.css'
 import ApiService from '../Common/ApiService';
 function ResetPassword() {
@@ -17,11 +16,10 @@ function ResetPassword() {
 
         try {
             let res = await ApiService.get(`forgetpass/getres/${id}/${token}`)
-            if (res.data.status === 200) {
+            if (res.status == 200) {
                 setMail(res.data.mail)
-                toast.success("verified");
+                alert('sucess')
             } else {
-                toast.error("invalid token")
             }
         } catch (error) {
             toast.error(error.response.data.message)
@@ -31,7 +29,7 @@ function ResetPassword() {
         getData();
     }, [])
     const changePassword = async (e) => {
-        // e.preventDefault()
+        console.log(mail);
         try {
             const res = await ApiService.post('/forgetpass/updatepassword', {
                 email: mail,
@@ -44,35 +42,25 @@ function ResetPassword() {
             }
         } catch (error) {
             if (error.response.data.status === 400) {
-                navigate('/forgetpassword')
+                navigate('/forgotPass')
                 toast.error('Invalid user')
             } else {
-                navigate('/forgetpassword')
+                navigate('/forgotPass')
                 toast.error(error.response.data.message);
             }
         }
     }
     return (<>
         <div className='resetPass'>
-            {/* */}
-            <div className='resetPass-l'>
-                {/* <img className='resetPassImg' src={resetPassImg}/> */}
-            </div>
-            <div className='resetPass-r'>
+            <div className='forgetPass-r'>
                 <h1>
                     Reset Password
                 </h1>
-                <TextField sx={{ m: 1, width: '15rem' }}
-                    required id="outlined-basic" label="Password" variant="outlined"
-                    value={pass} name='pass' onChange={(e) => setPass(e.target.value)}
+                <input
+                    value={pass} placeholder='newPassword' onChange={(e) => setPass(e.target.value)}
                 />
-                <Button onClick={() => { changePassword() }}
-                    variant='contained'
-                // color=''
-                >
-                    Change &nbsp;<PublishedWithChanges />
-                    {/* <SendIcon /> */}
-                </Button>
+                <button onClick={() => { changePassword() }}
+                >Change</button>
             </div>
 
         </div>

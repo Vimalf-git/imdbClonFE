@@ -9,11 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { movieData, watchListdata } = useSelector((state) => state.userSlice);
-    useEffect(() => {
-        dispatch(getMoviList())
-        dispatch(getWatchList())
-    }, [])
+    const { movieData, isLoading } = useSelector((state) => state.userSlice);
     const deleteData = (index, id) => {
         dispatch(remove(index));
         dispatch(delteMoviList(id))
@@ -23,15 +19,18 @@ const Home = () => {
         dispatch(addWatchList(data))
         dispatch(createWatchList(data))
     }
-    const editData=(id)=>{
-        console.log(id);
+    const editData = (id) => {
         dispatch(getWatchEditList(id));
         navigate(`/editmovie/${id}`)
     }
+    useEffect(() => {
+        dispatch(getMoviList());
+    }, [])
+    
     return (
         <div className='homeCon'>
             <div className='cardcon'>
-                {movieData.length > 0 ? movieData.map((e, i) => {
+                {!isLoading ? movieData.map((e, i) => {
                     return <div className='card' key={i}>
                         <div className='cardheader'>
                             <div className='addplayList'>
@@ -46,9 +45,7 @@ const Home = () => {
                             <img className='moviImg' src={e.moviePic} />
                         </div>
                         <div className='movieName'>
-                            <span>Movie:</span>
-                            <p>{e.movieName.toUpperCase()}</p>
-
+                            <p>Movie:<span>{e.movieName.toUpperCase()}</span></p>
                         </div>
                         <div className='cardDesc'>
                             <p>{e.desc[0].toUpperCase() + e.desc.slice(1)}</p>

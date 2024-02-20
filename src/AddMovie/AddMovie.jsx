@@ -15,16 +15,20 @@ const AddMovie = () => {
   const [rating, setRating] = useState('')
   const [customToggler, setCustomToggler] = useState(false);
   const [producercustomToggler, setproducercustomToggler] = useState(false);
-
+  const [producerGender, setProducerGender] = useState("");
+  const [producerBio, setProducerBio] = useState("");
+  const [actorGender, setActorGender] = useState("");
+  const [actorBio, setActorBio] = useState("");
   const dispatch = useDispatch();
   const { producerList, actorList, isLoading } = useSelector((state) => state.userSlice);
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    // if (postimageUpload == '' || producerName == '' || actorname == '' || moviename == '' || releaseYear == '' || desc == '' || rating == '') {
-    //   alert('fill all feild');
+    if (postimageUpload == '' || producerName == '' || actorname == '' || (moviename =='') || releaseYear == undefined || desc == '' || rating == '') {
+      console.log(releaseYear);
+      alert('fill all feild');
 
-    // } else {
+    } else {
       const payload = new FormData();
       payload.append('moviename', moviename);
       payload.append('actorname', actorname);
@@ -32,66 +36,89 @@ const AddMovie = () => {
       payload.append('desc', desc);
       payload.append('releaseYear', releaseYear);
       payload.append('rating', rating)
+
+      payload.append('producerGender', producerGender)
+      payload.append('producerBio', producerBio)
+      payload.append('actorGender', actorGender)
+      payload.append('actorBio', actorBio)
+
       payload.append('file', postimageUpload);
       try {
-        dispatch(postMoviList(payload))
-        // navigate('/home')
+        let res=dispatch(postMoviList(payload))
+        console.log(res);
+        dispatch(getMoviList())
+        // setTimeout(() => {
+          navigate('/home')
+        // }, 1500)
       } catch (error) {
 
-      // }
+      }
     }
   }
-const setActorData=()=>{
-  console.log(actorname);
-  dispatch(addActorData(actorname))
-  setCustomToggler(false);
-}
-const setProducerData=()=>{
-  // console.log(actorname);
-  dispatch(addProducerData(producerName))
-  setproducercustomToggler(false);
-}
+  const setActorData = () => {
+    console.log(actorname);
+    dispatch(addActorData(actorname))
+    setCustomToggler(false);
+  }
+  const setProducerData = () => {
+    // console.log(actorname);
+    dispatch(addProducerData(producerName))
+    setproducercustomToggler(false);
+  }
   useEffect(() => {
-    dispatch(getMoviList())
+    // dispatch(getMoviList())
   }, [])
   // console.log(actorList);
   return (
     <div className='addmovieCon'>
-      <form className='postform' >
+      <form className='postform' onSubmit={(e) => { e.preventDefault() }} >
         <div >
           <input className='textFeild' name='tittle' onChange={(e) => setMovieName(e.target.value)}
             type='text' placeholder='movie name' />
         </div>
 
-
         <div className='actorCon'>
           <select className='ProducerFeild' name='producername' value={producerName} onChange={(e) => setproducerName(e.target.value)}>
             <option value="">Producer</option>
-            {producerList.map((e,i) => <option key={i}>{e}</option>)}
+            {producerList.map((e, i) => <option key={i}>{e}</option>)}
           </select>
-          <Button className='addBtn' variant='contained' onClick={()=>setproducercustomToggler(true)}>Add</Button>
-         
-          {producercustomToggler ? <div className='cusTogglerCon'>
-          <IoMdCloseCircle className='crossIcon' onClick={() =>   setproducercustomToggler(pre=>!pre)} /> 
-            <input className='addInput' type='text' onChange={(e) => setproducerName(e.target.value)} />
-            <Button className='addBtn' variant='contained' onClick={()=>{setProducerData()}}>Save</Button>
-          </div> : <></>}
+          <Button className='addBtn' variant='contained' onClick={() => setproducercustomToggler(true)}>Add</Button>
 
+          {producercustomToggler ? <div className='cusTogglerCon'>
+            <IoMdCloseCircle className='crossIcon' onClick={() => setproducercustomToggler(pre => !pre)} />
+            <h4>Add Producer</h4>
+
+            <input className='addInput' type='text' placeholder='producerName' onChange={(e) => setproducerName(e.target.value)} />
+            <select onChange={(e) => { setProducerGender(e.target.value) }}>
+              <option className='male'>Male</option>
+              <option className='female'>Female</option>
+              <option className='trans'>trans</option>
+            </select>
+            <input onChange={(e) => { setProducerBio(e.target.value) }} placeholder='bio' className='addInput' type='text' />
+            <Button className='addBtn' variant='contained' onClick={() => { setProducerData() }}>Save</Button>
+          </div> : <></>}
         </div>
 
 
         <div className='actorCon'>
           <select className='actorFeild' value={actorname} name='actorname' onChange={(e) => setactorname(e.target.value)}>
             <option value="">Actor</option>
-            {actorList.map((e,i) => <option key={i}>{e}</option>)}
+            {actorList.map((e, i) => <option key={i}>{e}</option>)}
             {/* <option onClick={() => { setCustomToggler(true) }}>Other</option> */}
           </select>
-          <Button className='addBtn' variant='contained' onClick={()=>setCustomToggler(true)}>Add</Button>
+          <Button className='addBtn' variant='contained' onClick={() => setCustomToggler(true)}>Add</Button>
 
           {customToggler ? <div className='cusTogglerCon'>
-          <IoMdCloseCircle className='crossIcon' onClick={() =>   setCustomToggler(pre=>!pre)} /> 
-            <input className='addInput' type='text' onChange={(e) => setactorname(e.target.value)} />
-            <Button className='addBtn' variant='contained' onClick={()=>{setActorData()}}>Save</Button>
+            <IoMdCloseCircle className='crossIcon' onClick={() => setCustomToggler(pre => !pre)} />
+            <h4>Actor Name</h4>
+            <input className='addInput' type='text' placeholder='ActorName' onChange={(e) => setactorname(e.target.value)} />
+            <select onChange={(e) => { setActorGender(e.target.value) }}>
+              <option className='male'>Male</option>
+              <option className='female'>Female</option>
+              <option className='trans'>trans</option>
+            </select>
+            <input onChange={(e) => { setActorBio(e.target.value) }} placeholder='Bio' className='addInput' type='text' />
+            <Button className='addBtn' variant='contained' onClick={() => { setActorData() }}>Save</Button>
           </div> : <></>}
 
 
@@ -117,7 +144,7 @@ const setProducerData=()=>{
           </select>
         </div>
         <div >
-          <Button className='postBtn' onClick={()=>{handleSubmit()}} variant='contained' >Post</Button>
+          <Button className='postBtn'  onClick={() => { handleSubmit() }} variant='contained' >Post</Button>
         </div>
       </form>
     </div>

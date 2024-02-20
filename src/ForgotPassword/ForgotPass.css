@@ -14,7 +14,6 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    /* gap: 1rem; */
     border-radius: 1rem;
     background-color: rgb(225, 225, 227);
 }
@@ -23,7 +22,7 @@
     width: 18em;
     height: 3em;
     text-indent: 1rem;
-    /* background-color: aqua; */
+    border-radius: .5em;
 }
 
 .forgetPass-r>h1 {
@@ -37,25 +36,38 @@
     width: 8rem;
     text-decoration: none;
     color: rgb(18, 125, 219);
-    /* background-color: red; */
+    position: relative;
+    top: -1em;
+    left: -3.5em;
+}
+
+.forgetPass-r>button {
+    background-color: rgb(62, 62, 248);
+    width: 10em;
+    height: 3em;
+    color: #fff;
+    border-radius: .5em;
+    cursor: pointer;
 }
 
 @media(max-width:769px) {
     .forgetPass-r {
         width: 15rem;
         height: 15rem;
-       }
-       .forgetPass-r>h1 {
+    }
+
+    .forgetPass-r>h1 {
         width: 15em;
         height: 2em;
         display: flex;
         justify-content: center;
         font-size: 1em;
-       }
-       .forgetPass-r>input{
+    }
+
+    .forgetPass-r>input {
         width: 12em;
-        }
-    
+    }
+
 }
 
 @media(max-width:426px) {
@@ -75,7 +87,6 @@
     .forgetPass-r>input {
         width: 12em;
     }
-
 }
 
 @media(max-width:376px) {

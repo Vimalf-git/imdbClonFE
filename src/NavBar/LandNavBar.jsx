@@ -9,11 +9,12 @@ import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { jwtDecode } from 'jwt-decode';
 import { useDispatch, useSelector } from 'react-redux';
-import { filter, getWatchList } from '../Container/movieSlice';
+import { filter, getMoviList, getWatchList } from '../Container/movieSlice';
 
 const LandNavBar = () => {
     const [hamBurger, setHamBurger] = useState(false);
     const [userName, setUserName] = useState(null);
+    const [logOutToggler, setLogOutTogg] = useState(false);
     const navigate = useNavigate()
     const logout = useLogout()
     const dispatch = useDispatch()
@@ -24,6 +25,8 @@ const LandNavBar = () => {
         let name = jwtDecode(token).username
         setUserName(name)
         dispatch(getWatchList())
+        dispatch(getMoviList())
+
     }, [])
     const filterData = (value) => {
         dispatch(filter(value))
@@ -53,13 +56,17 @@ const LandNavBar = () => {
                     <p className='countCart'>{watchListdata.length}</p>
                     <p className='Watchlist'>Watchlist</p>
                 </div>
-                <div className='avatarProfile'
+                <div className='avatarProfile' onClick={() => { setLogOutTogg(pre => !pre) }}
                 >
                     <AccountCircleIcon className='avatarIcon'
                     >
                     </AccountCircleIcon>
                     <h4>{userName ?? ''}</h4>
                 </div>
+                {logOutToggler ? <div className='logoutToggEle'>
+                    <button className='logOutBtnDesView' onClick={()=>{logout()}}>Logout</button>
+                </div> : <></>}
+
             </div>
 
         </nav>
@@ -103,7 +110,7 @@ const LandNavBar = () => {
 
                         <Link to={'/addmovie'} className='addMovieList mobAllign'>AddMovie</Link>
                         <Link to={'/home'} className='addMovieList mobAllign'>Home</Link>
-                        <Button variant='contained' onClick={() => { logout() }} className='logoutbtn mobAllign' sx={{ backgroundColor: '#F4424E',marginBottom:'2em' }}>Logout</Button>
+                        <Button variant='contained' onClick={() => { logout() }} className='logoutbtn mobAllign' sx={{ backgroundColor: '#F4424E', marginBottom: '2em' }}>Logout</Button>
                     </div>
                 </> : <></>
                 }

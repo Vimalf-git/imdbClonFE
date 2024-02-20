@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LandNavBar from './NavBar/LandNavBar'
@@ -11,6 +8,7 @@ import AddMovie from './AddMovie/AddMovie'
 import EditMovie from './EditMovie/EditMovie'
 import WatchList from './watchList/WatchList'
 import ForgotPass from './ForgotPassword/ForgotPass'
+import ResetPassword from './ResetPassword/ResetPassword'
 function App() {
   return (
     <>
@@ -25,6 +23,7 @@ function App() {
           <Route path='/watchlist' element={<><LandNavBar/><WatchList/></>}/>
           <Route path='/editmovie/:id' element={<><LandNavBar /><EditMovie /></>} />
           <Route path='/forgotPass' element={<><ForgotPass/></>}/>
+          <Route path='/resetpassword/*' element={<><ResetPassword/></>}/>
         </Routes>
       </BrowserRouter>
     </>
