@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { IoMdCloseCircle, IoMdImages } from 'react-icons/io'
 import './AddMovie.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { addActorData, addProducerData, getMoviList, postMoviList } from '../Container/movieSlice'
+import { addActorData, addProducerData, getActorList, getMoviList, postMoviList } from '../Container/movieSlice'
 import { useNavigate } from 'react-router-dom'
 const AddMovie = () => {
   const [postimageUpload, setPostImageUpload] = useState(null);
@@ -66,6 +66,7 @@ const AddMovie = () => {
     setproducercustomToggler(false);
   }
   useEffect(() => {
+    dispatch(getActorList())
     // dispatch(getMoviList())
   }, [])
   // console.log(actorList);
@@ -80,7 +81,7 @@ const AddMovie = () => {
         <div className='actorCon'>
           <select className='ProducerFeild' name='producername' value={producerName} onChange={(e) => setproducerName(e.target.value)}>
             <option value="">Producer</option>
-            {producerList.map((e, i) => <option key={i}>{e}</option>)}
+            {producerList&&producerList.map((e, i) => <option key={i}>{e}</option>)}
           </select>
           <Button className='addBtn' variant='contained' onClick={() => setproducercustomToggler(true)}>Add</Button>
 
@@ -103,7 +104,7 @@ const AddMovie = () => {
         <div className='actorCon'>
           <select className='actorFeild' value={actorname} name='actorname' onChange={(e) => setactorname(e.target.value)}>
             <option value="">Actor</option>
-            {actorList.map((e, i) => <option key={i}>{e}</option>)}
+            {actorList&&actorList.map((e, i) => <option key={i}>{e}</option>)}
             {/* <option onClick={() => { setCustomToggler(true) }}>Other</option> */}
           </select>
           <Button className='addBtn' variant='contained' onClick={() => setCustomToggler(true)}>Add</Button>

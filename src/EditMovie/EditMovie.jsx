@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { IoMdImages } from 'react-icons/io'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getMoviList, getWatchEditList, updateMovieList } from '../Container/movieSlice'
+import { getActorList, getMoviList, getWatchEditList, updateMovieList } from '../Container/movieSlice'
 const EditMovie = () => {
     const param = useParams()
     let { producerList, actorList, updateEditData } = useSelector(state => state.userSlice);
@@ -54,6 +54,7 @@ const EditMovie = () => {
         getUpdateData();
     }, [updateEditData])
     useEffect(() => {
+        dispatch(getActorList())
         dispatch(getMoviList());
         dispatch(getWatchEditList(param.id));
     }, [])

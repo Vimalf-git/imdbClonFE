@@ -101,6 +101,19 @@ export const getWatchEditList =
         }
     })
 
+export const getActorList =
+    createAsyncThunk("getActorList", async (_, { rejectWithValue }) => {
+        try {
+            let res = await ApiService.get(`/getactors`);
+            if (res.status == 200) {
+                console.log(res.data);
+                return res.data;
+            }
+        } catch (error) {
+            return rejectWithValue({ error: error.message });
+        }
+    })
+// getactors
 // removewatchlist
 const movieData = createSlice({
     name: 'movieList',
@@ -128,7 +141,6 @@ const movieData = createSlice({
 
         },
         addActorData: (state, action) => {
-            // console.log(action.payload);
             state.actorList.push(action.payload)
         },
         addProducerData: (state, action) => {
@@ -158,10 +170,10 @@ const movieData = createSlice({
                 state.isLoading = false
                 state.movieDataSam = action.payload
 
-                let data = action.payload.map((e, i) => e.producerName)
-                state.producerList = data.filter((e, i) => data.indexOf(e) == i)
-                let actorData = action.payload.map((e, i) => e.actorName)
-                state.actorList = actorData.filter((e, i) => actorData.indexOf(e) == i)
+                // let data = action.payload.map((e, i) => e.producerName)
+                // state.producerList = data.filter((e, i) => data.indexOf(e) == i)
+                // let actorData = action.payload.map((e, i) => e.actorName)
+                // state.actorList = actorData.filter((e, i) => actorData.indexOf(e) == i)
 
             })
             .addCase(getMoviList.rejected, (state, action) => {
@@ -227,6 +239,20 @@ const movieData = createSlice({
                 state.updateEditData = [];
 
             })
+
+            .addCase(getActorList.pending, (state, action) => {
+            })
+            .addCase(getActorList.fulfilled, (state, action) => {
+                // state.updateEditData = action.payload
+                console.log(action.payload);
+                state.actorList = action.payload.actorList
+                state.producerList = action.payload.producerList
+            })
+            .addCase(getActorList.rejected, (state, action) => {
+                state.actorList = []
+                state.producerList = []
+            })
+
     }
 })
 
