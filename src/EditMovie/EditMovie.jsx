@@ -75,7 +75,7 @@ const EditMovie = () => {
                 </div>
                 <input className='dateFeild' value={releaseYear ?? ''} type='date' onChange={(e) => setReleaseYear(e.target.value)} />
                 <div>
-                    <input className='textFeild' value={desc ?? ''} name='desc' onChange={(e) => setDesc(e.target.value)} placeholder='Desc' />
+                    <input className='textFeild' value={desc ?? ''} name='desc' onChange={(e) => setDesc(e.target.value)} placeholder='Plot' />
                 </div>
                 <div className='imgsecpost' onClick={() => document.querySelector(".imgUpload").click()}>
                     <input className='imgUpload'

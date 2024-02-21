@@ -6,6 +6,7 @@ import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { useNavigate } from 'react-router-dom';
+import { DateRangeOutlined, StarBorderRounded } from '@mui/icons-material';
 const Home = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -46,8 +47,9 @@ const Home = () => {
                         <div className='movieName'>
                             <p>Movie:<span>{e.movieName.toUpperCase()}</span></p>
                         </div>
+                        <p className='plot'>Plot:</p>
                         <div className='cardDesc'>
-                            <p>{e.desc[0].toUpperCase() + e.desc.slice(1)}</p>
+                            <p>{e.desc.length > 105 ? e.desc[0].toUpperCase() + e.desc.slice(1, 105) + '...' : e.desc}</p>
                         </div>
                         <div className='cardFooter'>
                             <div className='footerName'>
@@ -55,8 +57,8 @@ const Home = () => {
                                 <p>Producer:<span style={{ color: '#F5C518' }}>{e.producerName}</span></p>
                             </div>
                             <div className='releaseyr'>
-                                <p>Roy: <span style={{ color: '#F5C518' }}>{e.releaseYear}</span></p>
-                                <p>Rating: <span style={{ color: '#F5C518' }}>{e.rating ?? 0}</span></p>
+                                <p><DateRangeOutlined /> <span style={{ color: '#F5C518' }}>{e.releaseYear}</span></p>
+                                <p ><StarBorderRounded /> <span style={{ color: '#F5C518' }}>{e.rating ?? 0}</span></p>
                             </div>
                         </div>
                     </div>

@@ -155,7 +155,7 @@ const AddMovie = () => {
         </div>
         <input className='dateFeild' type='date' onChange={(e) => setReleaseYear(e.target.value)} />
         <div>
-          <input className='textFeild' name='desc' onChange={(e) => setDesc(e.target.value)} placeholder='Desc' />
+          <input className='textFeild' name='desc' onChange={(e) => setDesc(e.target.value)} placeholder='Plot' />
         </div>
         <div className='imgsecpost' onClick={() => document.querySelector(".imgUpload").click()}>
           <input className='imgUpload'
