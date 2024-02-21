@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Home.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { addWatchList, createWatchList, delteMoviList, getMoviList, getWatchEditList, remove } from '../Container/movieSlice';
@@ -7,9 +7,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { useNavigate } from 'react-router-dom';
 import { DateRangeOutlined, StarBorderRounded } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
+import { jwtDecode } from 'jwt-decode';
 const Home = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    let token = sessionStorage.getItem('token');
+    let email = jwtDecode(token).email
+    const [mail, setMail] = useState('');
     const { movieData } = useSelector((state) => state.userSlice);
     const deleteData = (index, id) => {
         dispatch(remove(index));
@@ -24,6 +29,7 @@ const Home = () => {
         navigate(`/editmovie/${id}`)
     }
     useEffect(() => {
+        setMail(email)
         dispatch(getMoviList());
     }, [])
 
@@ -37,8 +43,12 @@ const Home = () => {
                                 <PlaylistAddIcon className='playlistBtn' onClick={() => { addWatchListData(e) }} />
                             </div>
                             <div className='editDelBtn'>
-                                <DeleteIcon className='deleteBtn' onClick={() => { deleteData(i, e._id) }} />
-                                <ModeEditIcon className='editBtn' onClick={() => { editData(e._id) }} />
+                                <IconButton disabled={mail == e.email ? false : true}>
+                                    <DeleteIcon className={mail == e.email ? 'deleteBtn' : 'fadedeleteBtn'} onClick={() => { deleteData(i, e._id) }} />
+                                </IconButton>
+                                <IconButton disabled={mail == e.email ? false : true}>
+                                    <ModeEditIcon className={mail == e.email ? 'editBtn' : 'fadeeditBtn'} onClick={() => { editData(e._id) }} />
+                                </IconButton>
                             </div>
                         </div>
                         <div className='cardimg'>

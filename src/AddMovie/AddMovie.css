@@ -156,11 +156,7 @@
     display: flex;
     align-items: center;
 }
-@media(max-width:1441px) {
-    .cusTogglerCon {
-        /* top: 20em */
-    }
-}
+
 
 @media(max-width:1025px) {
     .addmovieCon {

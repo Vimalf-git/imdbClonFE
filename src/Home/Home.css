@@ -157,6 +157,12 @@
 .deleteBtn{
     color: rgb(240, 21, 21);
 }
+.editBtn{
+    color: #fff;
+}
+.fadedeleteBtn,.fadeeditBtn{
+    color: #827f7f;
+}
 .plot{
     width: 91%;
 }
