@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import './Home.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { addWatchList, createWatchList, delteMoviList, getMoviList, getWatchEditList, getWatchList, remove } from '../Container/movieSlice';
+import { addWatchList, createWatchList, delteMoviList, getMoviList, getWatchEditList, remove } from '../Container/movieSlice';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
@@ -9,13 +9,12 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { movieData, isLoading } = useSelector((state) => state.userSlice);
+    const { movieData, isMovieListPost } = useSelector((state) => state.userSlice);
     const deleteData = (index, id) => {
         dispatch(remove(index));
-        dispatch(delteMoviList(id))
+        dispatch(delteMoviList(id));
     }
     const addWatchListData = (data) => {
-        console.log(data);
         dispatch(addWatchList(data))
         dispatch(createWatchList(data))
     }
@@ -23,14 +22,18 @@ const Home = () => {
         dispatch(getWatchEditList(id));
         navigate(`/editmovie/${id}`)
     }
+    // useCallback(()=>{
+    //     dispatch(getMoviList());
+
+    // },[movieData])
     useEffect(() => {
         dispatch(getMoviList());
-    }, [])
-    
+    }, [isMovieListPost])
+
     return (
         <div className='homeCon'>
             <div className='cardcon'>
-                {!isLoading ? movieData.map((e, i) => {
+                {movieData.length > 0 ? movieData.map((e, i) => {
                     return <div className='card' key={i}>
                         <div className='cardheader'>
                             <div className='addplayList'>

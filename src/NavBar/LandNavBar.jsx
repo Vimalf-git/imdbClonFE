@@ -3,8 +3,8 @@ import './LandNav.css'
 import { Button } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom';
 import useLogout from '../Common/useLogout';
-import { FaHamburger } from "react-icons/fa";
-import { IoMdCloseCircle } from "react-icons/io";
+import CancelIcon from '@mui/icons-material/Cancel';
+import LunchDiningIcon from '@mui/icons-material/LunchDining';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { jwtDecode } from 'jwt-decode';
@@ -25,7 +25,7 @@ const LandNavBar = () => {
         let name = jwtDecode(token).username
         setUserName(name)
         dispatch(getWatchList())
-        dispatch(getMoviList())
+        // dispatch(getMoviList())
 
     }, [])
     const filterData = (value) => {
@@ -87,8 +87,8 @@ const LandNavBar = () => {
             </div>
             <div>
                 {hamBurger ?
-                    <IoMdCloseCircle className='burgerIcon' onClick={() => setHamBurger(pre => !pre)} /> :
-                    <FaHamburger className='burgerIcon' onClick={() => setHamBurger(pre => !pre)} />
+                    <CancelIcon className='burgerIcon' onClick={() => setHamBurger(pre => !pre)} /> :
+                    <LunchDiningIcon className='burgerIcon' onClick={() => setHamBurger(pre => !pre)} />
                 }
                 {hamBurger ? <>
                     <div className='landnav-r-conMob'>

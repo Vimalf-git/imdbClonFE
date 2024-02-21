@@ -67,7 +67,10 @@
     .forgetPass-r>input {
         width: 12em;
     }
-
+    .forgetPass-r>a{
+        position: relative;
+        left: .1em;
+    }
 }
 
 @media(max-width:426px) {
@@ -86,6 +89,10 @@
 
     .forgetPass-r>input {
         width: 12em;
+    }
+    .forgetPass-r>a{
+        position: relative;
+        left: .1em;
     }
 }
 
@@ -106,7 +113,10 @@
     .forgetPass-r>input {
         width: 12em;
     }
-
+    .forgetPass-r>a{
+        position: relative;
+        left: .1em;
+    }
 }
 
 @media(max-width:321px) {
@@ -133,7 +143,10 @@
     .forgetPass-r>input {
         width: 12em;
     }
-
+    .forgetPass-r>a{
+        position: relative;
+        left: .1em;
+    }
 }
 
 @media(min-width:2400px) {

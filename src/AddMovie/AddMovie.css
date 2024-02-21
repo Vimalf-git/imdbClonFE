@@ -1,10 +1,13 @@
 .addmovieCon {
     width: 100%;
-    height: 90vh;
+    min-height: 90vh;
+    height: auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: black;
+    gap: 1em;
 }
 
 .postform {
@@ -13,7 +16,6 @@
     background-color: #fff;
     display: flex;
     flex-direction: column;
-    /* gap: 1em; */
     justify-content: space-around;
     align-items: center;
     border-radius: 4px;
@@ -107,15 +109,17 @@
     box-shadow: 0, 0.1em, 1em black;
     z-index: 1;
 }
-.cusTogglerCon>select{
+
+.cusTogglerCon>select {
     width: 12em;
     height: 2em;
     text-indent: .5em;
 }
+
 .crossIcon {
     position: relative;
-    right: -6.5em;
-    top: -1em;
+    right: -4.5em;
+    top: -.8em;
 }
 
 .addInput {
@@ -123,24 +127,66 @@
     text-indent: 1em;
 }
 
+.errorMsg {
+    background-color: #fff;
+    width: 20em;
+    height: 14em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+    align-items: center;
+    border-radius: .4em;
+    border-style: solid;
+    border-width: 1px;
+    color: red;
+    border-color: rgb(199, 101, 101) !important;
+    box-shadow: inset rgb(205, 78, 78) 0px 0px 10px 1px;
+
+}
+
+.errormsgCon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .2em;
+    color: black;
+}
+
+@media(max-width:1441px) {
+    .cusTogglerCon {
+        top: 20em
+    }
+}
+
 @media(max-width:1025px) {
     .addmovieCon {
         width: 1060px;
-        height: 100vh;
+        height: auto;
+        min-height: 100vh;
     }
 }
 
 @media(max-width:769px) {
     .addmovieCon {
         width: 790px;
-        height: 100vh;
+        height: auto;
+        min-height: 100vh;
     }
 }
 
 @media(max-width:426px) {
     .addmovieCon {
         width: 790px;
-        height: 100vh;
+        height: auto;
+        min-height: 100vh;
+    }
+}
+
+@media(max-width:376px) {
+    .addmovieCon {
+        width: 790px;
+        height: auto;
         min-height: 100vh;
     }
 }
@@ -148,7 +194,7 @@
 @media(max-width:321px) {
     .addmovieCon {
         width: 720px;
-        height: 100vh;
+        height: auto;
         min-height: 100vh;
     }
 }
@@ -235,5 +281,21 @@
 
     .addInput {
         height: 2em;
+    }
+
+    .errorMsg {
+        width: 20em;
+        height: 20em;
+        font-size: 2em;
+    }
+
+    .cusTogglerCon {
+        height: 30em;
+        top: 45em;
+    }
+
+    .crossIcon {
+        right: -7em;
+        top: 0em;
     }
 }

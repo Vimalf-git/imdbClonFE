@@ -1,6 +1,7 @@
 import { Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { IoMdImages } from 'react-icons/io'
+// import { IoMdImages } from 'react-icons/io'
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getActorList, getMoviList, getWatchEditList, updateMovieList } from '../Container/movieSlice'
@@ -42,7 +43,6 @@ const EditMovie = () => {
         }
     }
     const getUpdateData = () => {
-        console.log(updateEditData);
         setMovieName(updateEditData.movieName);
         setReleaseYear(updateEditData.releaseYear);
         setproducerName(updateEditData.producerName);
@@ -84,7 +84,7 @@ const EditMovie = () => {
                     <input className='imgUpload'
                         onChange={(e) => { setPostImageUpload(e.target.files[0]) }}
                         accept='.jpeg, .png, .jpg' type='file' hidden />
-                    <IoMdImages className='faImg' /><span style={{ color: 'blue', cursor: 'pointer' }}>select your movie img</span>
+                    <AddPhotoAlternateIcon className='faImg' /><span style={{ color: 'blue', cursor: 'pointer' }}>select your movie img</span>
                 </div>
                 <div>
                     <select className='ratingEditFeild' value={rating ?? ''} name='rating' onChange={(e) => setRating(e.target.value)}>

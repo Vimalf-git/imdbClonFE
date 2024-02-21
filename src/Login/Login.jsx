@@ -48,12 +48,6 @@ function Login() {
     return (
         <>
             <div className='loginPage'>
-                {/* {loginTog ?  */}
-
-                {/* <CancelIcon className='cancelIcon' style={{ color: '#F4424E' }}  
-                 onClick={() => setLoginTog(pre => !pre)} 
-                />  */}
-                {/* : <></>} */}
                 <div className='loginCard'>
                     <Typography variant='h5' component="p"
                         sx={{ color: "#4481eb" }}>
