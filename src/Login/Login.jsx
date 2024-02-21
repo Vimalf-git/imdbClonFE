@@ -1,37 +1,34 @@
-import React, { useContext, useState } from 'react'
+import React, {useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import './Login.css'
 import ApiService from '../Common/ApiService'
-import CancelIcon from '@mui/icons-material/Cancel';
 import { Formik } from 'formik';
 import * as Yup from 'yup'
+import useLogout from '../Common/useLogout';
 function Login() {
     const navigate = useNavigate();
+    const logout = useLogout()
     const loginVerify = async (value) => {
         try {
             const res = await ApiService.post('/login', value)
             if (res.status == 200) {
                 toast.success("login success")
                 sessionStorage.setItem('token', res.data.token)
-
                 navigate('/home')
             }
         } catch (error) {
             if (error.response.status === 400) {
                 toast.error(error.response.data.message)
-                sessionStorage.clear()
-                navigate('/loginlanding')
+                logout()
             }
             else {
                 toast.error("Error Occoured! Please try after some time")
-                sessionStorage.clear()
-                navigate('/loginlanding')
+                logout()
             }
         }
-
     }
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -100,7 +97,6 @@ function Login() {
                                 </div>
                                 <div className='for-crt-link mb-3'>
                                     <Link style={{ textDecoration: 'none', color: '#4481eb' }} to='/forgotPass'>Forget password?</Link>
-                                    {/* <Link style={{ textDecoration: 'none', color: '#4481eb' }} to='/signup'>New to Here?</Link> */}
                                 </div>
                                 <div className="d-grid">
                                     <Button variant='contained' className='loginBtn'
@@ -114,14 +110,13 @@ function Login() {
                 <div className="singupCon">
                     <p>---------- or ----------</p>
                     <Button variant='contained' className='loginBtn'
-                    onClick={()=>{navigate('/signup')}}
+                        onClick={() => { navigate('/signup') }}
                         type='submit'>
                         Create Account
                     </Button>
                 </div>
 
             </div>
-            {/* </div> */}
         </>
     )
 }

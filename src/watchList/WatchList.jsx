@@ -3,6 +3,7 @@ import './WatchList.css'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWatchList, removeWatchList, removewatch } from '../Container/movieSlice';
+import { jwtDecode } from 'jwt-decode';
 const WatchList = () => {
   const dispatch = useDispatch();
   const { watchListdata } = useSelector((state) => state.userSlice);
@@ -10,7 +11,12 @@ const WatchList = () => {
     dispatch(removeWatchList(index));
     dispatch(removewatch(id))
   }
-  useEffect(() => { dispatch(getWatchList()) }, [])
+  useEffect(() => { 
+    let token = sessionStorage.getItem('token');
+        let email = jwtDecode(token).email
+      
+    dispatch(getWatchList(email)) 
+  }, [])
   return (
     <div className='watchListCon'>
       <div className='WatchcardCon'>

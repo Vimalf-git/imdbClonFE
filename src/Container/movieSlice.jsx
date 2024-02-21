@@ -48,9 +48,9 @@ export const createWatchList =
 
 
 export const getWatchList =
-    createAsyncThunk("getWatchList", async (_, { rejectWithValue }) => {
+    createAsyncThunk("getWatchList", async (value, { rejectWithValue }) => {
         try {
-            let res = await ApiService.get('/getwatchlist')
+            let res = await ApiService.get(`/getwatchlist/${value}`)
             if (res.status == 200) {
                 return res.data.data
             }
@@ -112,12 +112,10 @@ const movieData = createSlice({
         movieData: [],
         movieDataSam: [],
         isLoading: false,
-        isMovieListPost:false,
         watchListdata: [],
         producerList: [],
         actorList: [],
         updateEditData: {},
-        moviesAddError: ''
     },
     reducers: {
         filter: (state, action) => {
@@ -167,16 +165,7 @@ const movieData = createSlice({
                 state.movieDataSam = []
                 state.movieData = []
             })
-            .addCase(postMoviList.pending, (state, action) => {
-                state.isMovieListPost = true;
-            })
-            .addCase(postMoviList.fulfilled, (state, action) => {
-                state.isMovieListPost = false
-                })
-            .addCase(postMoviList.rejected, (state, action) => {
-                state.isMovieListPost = false
-                 })
-
+            
             .addCase(getWatchList.pending, (state, action) => {
             })
             .addCase(getWatchList.fulfilled, (state, action) => {

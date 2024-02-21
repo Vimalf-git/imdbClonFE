@@ -7,6 +7,8 @@ import './AddMovie.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { addActorData, addProducerData, getActorList, getMoviList, postMoviList } from '../Container/movieSlice'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+import { jwtDecode } from 'jwt-decode';
 const AddMovie = () => {
   const [postimageUpload, setPostImageUpload] = useState(null);
   const [producerName, setproducerName] = useState("");
@@ -26,7 +28,7 @@ const AddMovie = () => {
   const navigate = useNavigate();
   const [errorHandleToggel, setErrorHandle] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (postimageUpload == null || producerName == '' || actorname == '' || moviename == '' || releaseYear == undefined || desc == '' || rating == '') {
       setErrorHandle(true)
       let setdata =
@@ -39,15 +41,20 @@ const AddMovie = () => {
           {postimageUpload == null ? <p> Enter your postimageUpload</p> : ''}
 
         </>
-
       setErrorMsg(setdata)
       setTimeout(() => {
         setErrorHandle(false)
         setdata('')
       }, 3000)
-     
+
     } else {
+
+
+      let token = sessionStorage.getItem('token');
+        let email = jwtDecode(token).email
+       
       const payload = new FormData();
+      payload.append('email', email);
       payload.append('moviename', moviename);
       payload.append('actorname', actorname);
       payload.append('producerName', producerName);
@@ -62,13 +69,15 @@ const AddMovie = () => {
 
       payload.append('file', postimageUpload);
       try {
-        dispatch(postMoviList(payload))
-        dispatch(getMoviList())
-        setTimeout(() => {
+        let resdata = await dispatch(postMoviList(payload))
+        let status = resdata.type.split('/')[1]
+        if (status == "rejected") {
+          toast.error('movie is already exist')
+        } else if (status == "fulfilled") {
           navigate('/home')
-        }, 2000)
+        }
       } catch (error) {
-
+        toast.error(error.message)
       }
     }
   }
@@ -90,7 +99,7 @@ const AddMovie = () => {
     <div className='addmovieCon'>
       {errorHandleToggel ?
         < div className='errorMsg'>
-          <p><ReportProblemOutlinedIcon/>There was a problem</p>
+          <p><ReportProblemOutlinedIcon />There was a problem</p>
           <div className='errormsgCon'>{errorMsg}</div>
         </div>
         : ''}
@@ -124,12 +133,9 @@ const AddMovie = () => {
 
 
         <div className='actorCon'>
-          <select className='actorFeild' onBlur={() => {
-            actorname == '' ? alert('expty') : ''
-          }} value={actorname} name='actorname' onChange={(e) => setactorname(e.target.value)}>
+          <select className='actorFeild'  value={actorname} name='actorname' onChange={(e) => setactorname(e.target.value)}>
             <option value="">Actor</option>
             {actorList && actorList.map((e, i) => <option key={i}>{e}</option>)}
-            {/* <option onClick={() => { setCustomToggler(true) }}>Other</option> */}
           </select>
           <Button className='addBtn' variant='contained' onClick={() => setCustomToggler(true)}>Add</Button>
           {customToggler ? <div className='cusTogglerCon'>
@@ -147,8 +153,6 @@ const AddMovie = () => {
 
 
         </div>
-        {/* <p>nhgf</p> */}
-
         <input className='dateFeild' type='date' onChange={(e) => setReleaseYear(e.target.value)} />
         <div>
           <input className='textFeild' name='desc' onChange={(e) => setDesc(e.target.value)} placeholder='Desc' />

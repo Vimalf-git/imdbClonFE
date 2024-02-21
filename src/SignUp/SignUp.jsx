@@ -23,6 +23,7 @@ function Signup() {
             const res = await ApiService.post('/createuser', value);
             if (res.status === 201) {
                 toast.success('successfully account created')
+                navigate('/login')
                 }
         } catch (error) {
             if (error.response.data.status === 400) {

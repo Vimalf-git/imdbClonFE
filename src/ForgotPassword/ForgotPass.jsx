@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './ForgotPass.css'
 import ApiService from '../Common/ApiService';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 function ForgotPass() {
 
     const [mail, setMail] = useState("");
@@ -10,14 +11,18 @@ function ForgotPass() {
             if (mail !== "") {
                 const res = await ApiService.post('/forgetpass', { email: mail })
                 if (res.status === 200) {
-                    alert('please check your mail')
+                    toast.success('verification mail sent')
                 }
             } else {
-                alert('error')
+                toast.error('please enter your mail')
             }
         } catch (error) {
             if (error.response.data.status === 400) {
+                toast.error('verification failed')
+
             } else {
+                toast.error(error.message)
+
             }
         }
     }

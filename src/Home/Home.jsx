@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import './Home.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { addWatchList, createWatchList, delteMoviList, getMoviList, getWatchEditList, remove } from '../Container/movieSlice';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { movieData, isMovieListPost } = useSelector((state) => state.userSlice);
+    const { movieData } = useSelector((state) => state.userSlice);
     const deleteData = (index, id) => {
         dispatch(remove(index));
         dispatch(delteMoviList(id));
@@ -24,7 +24,7 @@ const Home = () => {
     }
     useEffect(() => {
         dispatch(getMoviList());
-    }, [isMovieListPost])
+    }, [])
 
     return (
         <div className='homeCon'>
@@ -60,7 +60,10 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                }) : <div className='loadingCom' style={{ color: 'white' }}>Loading...</div>}
+                }) : <div className='loadingCom' style={{ color: 'white' }}>
+                    <p>Loading...</p>
+                    <p>No Data Found</p>
+                </div>}
             </div>
         </div>
     )

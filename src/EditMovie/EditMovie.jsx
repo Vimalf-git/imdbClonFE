@@ -17,28 +17,27 @@ const EditMovie = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const handleSubmit = () => {
-        if (postimageUpload == '' || producerName == '' || actorname == '' || moviename == '' || releaseYear == '' || desc == '' || rating == '') {
-            alert('fill all feild');
-        } else {
-            const payload = new FormData();
-            payload.append('id', param.id);
-            payload.append('moviename', moviename);
-            payload.append('actorname', actorname);
-            payload.append('producerName', producerName);
-            payload.append('desc', desc);
-            payload.append('rating', rating)
-            payload.append('releaseYear', releaseYear);
-            payload.append('file', postimageUpload);
-            try {
-                dispatch(updateMovieList(payload))
-                setTimeout(() => {
-                    navigate('/home')
-                }, 1000)
+    const handleSubmit = async () => {
 
-            } catch (error) {
-
+        const payload = new FormData();
+        payload.append('id', param.id);
+        payload.append('moviename', moviename);
+        payload.append('actorname', actorname);
+        payload.append('producerName', producerName);
+        payload.append('desc', desc);
+        payload.append('rating', rating)
+        payload.append('releaseYear', releaseYear);
+        payload.append('file', postimageUpload);
+        try {
+            let resData = await dispatch(updateMovieList(payload))
+            let status = resData.type.split('/')[1]
+            if (status == "rejected") {
+                toast.error('movie is already exist')
+            } else if (status == "fulfilled") {
+                navigate('/home')
             }
+        } catch (error) {
+            toast.error(error.message)
         }
     }
     const getUpdateData = () => {
@@ -54,7 +53,6 @@ const EditMovie = () => {
     }, [updateEditData])
     useEffect(() => {
         dispatch(getActorList())
-        dispatch(getMoviList());
         dispatch(getWatchEditList(param.id));
     }, [])
     return (
@@ -97,7 +95,7 @@ const EditMovie = () => {
                 </div>
 
                 <div>
-                    <Button className='postBtn' variant='contained' onClick={() => { handleSubmit() }}>Post</Button>
+                    <Button className='postBtn' variant='contained' onClick={() => { handleSubmit() }}>Update</Button>
                 </div>
             </form>
         </div>)
