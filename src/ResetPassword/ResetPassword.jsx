@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify';
-import { Button, TextField } from '@mui/material';
-import { PublishedWithChanges } from '@mui/icons-material';
 import './ResetPassword.css'
 import ApiService from '../Common/ApiService';
 function ResetPassword() {
@@ -29,7 +27,6 @@ function ResetPassword() {
         getData();
     }, [])
     const changePassword = async (e) => {
-        console.log(mail);
         try {
             const res = await ApiService.post('/forgetpass/updatepassword', {
                 email: mail,

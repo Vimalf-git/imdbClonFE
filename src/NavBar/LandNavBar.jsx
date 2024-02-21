@@ -25,8 +25,6 @@ const LandNavBar = () => {
         let name = jwtDecode(token).username
         setUserName(name)
         dispatch(getWatchList())
-        // dispatch(getMoviList())
-
     }, [])
     const filterData = (value) => {
         dispatch(filter(value))

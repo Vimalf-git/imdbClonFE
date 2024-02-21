@@ -2,6 +2,7 @@ import { Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CancelIcon from '@mui/icons-material/Cancel';
+import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined';
 import './AddMovie.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { addActorData, addProducerData, getActorList, getMoviList, postMoviList } from '../Container/movieSlice'
@@ -72,7 +73,6 @@ const AddMovie = () => {
     }
   }
   const setActorData = () => {
-    console.log(actorname);
     dispatch(addActorData(actorname))
     setCustomToggler(false);
   }
@@ -90,7 +90,7 @@ const AddMovie = () => {
     <div className='addmovieCon'>
       {errorHandleToggel ?
         < div className='errorMsg'>
-          <p>There was a problem</p>
+          <p><ReportProblemOutlinedIcon/>There was a problem</p>
           <div className='errormsgCon'>{errorMsg}</div>
         </div>
         : ''}

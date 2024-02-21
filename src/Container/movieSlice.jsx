@@ -5,7 +5,6 @@ export const getMoviList =
     createAsyncThunk("getMovieList", async (_, { rejectWithValue }) => {
         try {
             const res = await ApiService.get('/getmovielist');
-            // if (res.status == 200)
             return res.data.data;
         } catch (error) {
             return rejectWithValue({ error: error.message })
@@ -14,7 +13,6 @@ export const getMoviList =
 
 export const postMoviList =
     createAsyncThunk("postMovieList", async (value, { rejectWithValue }) => {
-        console.log('enter into post movie');
         try {
             await ApiService.post('/createmovie', value, {
                 headers: { "Content-Type": 'multipart/form-data' },
@@ -102,15 +100,12 @@ export const getActorList =
         try {
             let res = await ApiService.get(`/getactors`);
             if (res.status == 200) {
-                console.log(res.data);
                 return res.data;
             }
         } catch (error) {
             return rejectWithValue({ error: error.message });
         }
     })
-// getactors
-// removewatchlist
 const movieData = createSlice({
     name: 'movieList',
     initialState: {
@@ -161,8 +156,6 @@ const movieData = createSlice({
 
         builder.addCase(getMoviList.pending, (state, action) => {
             state.isLoading = true;
-            // state.movieData = [];
-
         })
             .addCase(getMoviList.fulfilled, (state, action) => {
                 state.movieData = action.payload;
@@ -174,35 +167,22 @@ const movieData = createSlice({
                 state.movieDataSam = []
                 state.movieData = []
             })
-
-            // postmovieData
             .addCase(postMoviList.pending, (state, action) => {
                 state.isMovieListPost = true;
-                // state.movieData = []
-
             })
             .addCase(postMoviList.fulfilled, (state, action) => {
                 state.isMovieListPost = false
-                // state.movieData = []
-
-                // getMoviList()
-            })
-            // .addCase(postMoviList.rejected, (state, action) => {
-            //     console.log(action.payload);
-            //     state.moviesAddError=action.payload
-            //     state.isLoading = false;
-            // })
+                })
+            .addCase(postMoviList.rejected, (state, action) => {
+                state.isMovieListPost = false
+                 })
 
             .addCase(getWatchList.pending, (state, action) => {
-                // state.isLoading = true;
             })
             .addCase(getWatchList.fulfilled, (state, action) => {
-                // state.isLoading = false
                 state.watchListdata = action.payload
-                // state.movieData = []
             })
             .addCase(getWatchList.rejected, (state, action) => {
-                // state.isLoading = false;
                 state.watchListdata = [];
 
             })
@@ -210,15 +190,11 @@ const movieData = createSlice({
             // editUpdatedata
 
             .addCase(getWatchEditList.pending, (state, action) => {
-                // state.isLoading = true;
-                // state.updateEditData = '';
-            })
+                })
             .addCase(getWatchEditList.fulfilled, (state, action) => {
-                // state.isLoading = false
                 state.updateEditData = action.payload
             })
             .addCase(getWatchEditList.rejected, (state, action) => {
-                // state.isLoading = false;
                 state.updateEditData = [];
 
             })
@@ -226,8 +202,6 @@ const movieData = createSlice({
             .addCase(getActorList.pending, (state, action) => {
             })
             .addCase(getActorList.fulfilled, (state, action) => {
-                // state.updateEditData = action.payload
-                console.log(action.payload);
                 state.actorList = action.payload.actorList
                 state.producerList = action.payload.producerList
             })

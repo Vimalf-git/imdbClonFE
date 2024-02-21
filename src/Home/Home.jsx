@@ -22,10 +22,6 @@ const Home = () => {
         dispatch(getWatchEditList(id));
         navigate(`/editmovie/${id}`)
     }
-    // useCallback(()=>{
-    //     dispatch(getMoviList());
-
-    // },[movieData])
     useEffect(() => {
         dispatch(getMoviList());
     }, [isMovieListPost])

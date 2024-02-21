@@ -1,6 +1,5 @@
 import { Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-// import { IoMdImages } from 'react-icons/io'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'

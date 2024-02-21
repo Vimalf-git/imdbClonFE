@@ -141,7 +141,7 @@
     border-width: 1px;
     color: red;
     border-color: rgb(199, 101, 101) !important;
-    box-shadow: inset rgb(205, 78, 78) 0px 0px 10px 1px;
+    box-shadow: inset rgb(250, 155, 155) 0px 0px 15px 1px;
 
 }
 
@@ -152,7 +152,10 @@
     gap: .2em;
     color: black;
 }
-
+.errorMsg>p{
+    display: flex;
+    align-items: center;
+}
 @media(max-width:1441px) {
     .cusTogglerCon {
         top: 20em

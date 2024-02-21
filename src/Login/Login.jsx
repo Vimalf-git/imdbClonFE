@@ -5,13 +5,10 @@ import { Button, IconButton, InputAdornment, TextField, Typography } from '@mui/
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import './Login.css'
 import ApiService from '../Common/ApiService'
-// import { LoginDataCon } from '../Context/LoginContext';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Formik } from 'formik';
 import * as Yup from 'yup'
 function Login() {
-    // const { loginTog, setLoginTog
-    // } = useContext(LoginDataCon)
     const navigate = useNavigate();
     const loginVerify = async (value) => {
         try {

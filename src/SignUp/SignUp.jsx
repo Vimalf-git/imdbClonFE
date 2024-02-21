@@ -1,4 +1,4 @@
-import { Button, Checkbox, FormControlLabel, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
+import { Button,IconButton, InputAdornment, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import './Signup.css'
@@ -7,10 +7,7 @@ import * as Yup from 'yup'
 import { toast } from 'react-toastify'
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-// import pencilImg from '../../assets/Login/pencilImg.svg'
-// import { LoginDataCon } from '../Context/LoginContext';
 import ApiService from '../Common/ApiService';
-// import CancelIcon from '@mui/icons-material/Cancel';
 
 function Signup() {
     const [showPassword, setShowPassword] = useState(false);
