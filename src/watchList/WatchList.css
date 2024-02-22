@@ -78,7 +78,11 @@
     color: rgb(206, 84, 84);
     cursor: pointer;
 }
-
+.ratingsWatchList>p{
+    display: flex;
+    align-items: center;
+    gap: .5em;
+}
 @media(max-width:1025px){
     .watchListCon{
         width: 1060px;

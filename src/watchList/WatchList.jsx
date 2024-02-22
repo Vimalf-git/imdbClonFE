@@ -4,6 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWatchList, removeWatchList, removewatch } from '../Container/movieSlice';
 import { jwtDecode } from 'jwt-decode';
+import { DateRangeOutlined, StarBorderRounded } from '@mui/icons-material';
 const WatchList = () => {
   const dispatch = useDispatch();
   const { watchListdata } = useSelector((state) => state.userSlice);
@@ -11,11 +12,11 @@ const WatchList = () => {
     dispatch(removeWatchList(index));
     dispatch(removewatch(id))
   }
-  useEffect(() => { 
+  useEffect(() => {
     let token = sessionStorage.getItem('token');
-        let email = jwtDecode(token).email
-      
-    dispatch(getWatchList(email)) 
+    let email = jwtDecode(token).email
+
+    dispatch(getWatchList(email))
   }, [])
   return (
     <div className='watchListCon'>
@@ -32,8 +33,8 @@ const WatchList = () => {
                 <p>Producer: <span style={{ color: '#F5C518' }}>{e.producerName}</span></p>
               </div>
               <div className='ratingsWatchList'>
-                <p>Roy: <span style={{ color: '#F5C518' }}>{e.releaseYear}</span></p>
-                <p>Rating: <span style={{ color: '#F5C518' }}>{e.rating ?? 0}</span></p>
+                <p><DateRangeOutlined /> <span style={{ color: '#F5C518' }}>{e.releaseYear}</span></p>
+                <p ><StarBorderRounded /> <span style={{ color: '#F5C518' }}>{e.rating ?? 0}</span></p>
               </div>
               <div className='watchListDel'>
                 <DeleteIcon className='watchdelIcon' onClick={() => { deleteData(i, e._id) }} />
